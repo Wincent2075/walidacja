@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">  
+    <title>Walidacja Wincenty</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='css.css'>
+    <style>
+        body{
+    background-color: #00ffaa;
+}
+    </style>
+</head>
+<body>
+    <div id="formularz">
+    <form>
+
+        <label for="name" style="font-size:20px;">Imie i Nazwisko:</label>
+        <input type="text" id="name" placeholder="imie i nazwisko"  autocomplete="off">* <br>
+
+        <label for="email" style="font-size:20px;">Email:</label>
+        <input type="email" id="email" placeholder="mail@gmail.com" autocomplete="off">* <br>
+
+        <label for="ocena" style="font-size:20px;">Ocena:</label>
+        <input type="number" id="ocena" autocomplete="off" >* <br>
+
+        <label for="data" style="font-size:20px;">Data:</label>
+        <input type="datetime-local" id="data" autocomplete="off">* <br>
+        
+        <input type="submit" value="wyslij"id="submit">
+        <input type="reset" id="reset">
+      </form>
+    </div>
+   
+   
+   
+   
+   <script defer>
+       
+let imie = document.getElementById('name');
+
+
+
+imie.addEventListener("input", () =>
+{
+    let imieRegex = /[a-z]{1,10}/g;
+    let imieNRegex = /[a-z]{1,10}\s[a-z]{1,10}/g;
+    if(imieNRegex.test(imie.value)==true){
+        imie.setCustomValidity('')
+    }
+    else if(imieRegex.test(imie.value) == true)
+    {
+        imie.setCustomValidity("jeszcze nie wszystko")
+    }
+
+})
+
+
+
+
+let email = document.getElementById("email");
+
+      //metoda, ktora daje wywolywac funkcje, kiedy bedzie jakies zdazenie
+email.addEventListener("input", () =>{
+    let emailRegex = /[a-z]{2,3}\@[a-z]{2,5}\.[a-z]{2,3}/g;
+    if(emailRegex.test(email.value)==true)
+    {
+        email.setCustomValidity("")
+    } 
+    else{
+        email.setCustomValidity("Wpisano niepoprawnie email")
+    }
+    if(!email.value.includes("@")){
+        email.setCustomValidity("W adresie '"+email.value+"' brakuje znaku '@'")
+    }
+    if(email.value.includes("@")&&!email.value.includes(".")){
+        email.setCustomValidity("napisz po '@' gmail.com'"+email.value+"' jest niepełny")
+    }
+})
+
+
+
+      //zwraca pierwszego potomka(zmienna)
+let ocena = document.getElementById("ocena")
+
+
+ocena.addEventListener("input", () =>{
+    let ocenaRegex = /[0-6]/g;
+    if(ocenaRegex.test(ocena.value)==true)
+    {
+        ocena.setCustomValidity("")
+    }else
+    {
+        ocena.setCustomValidity("Wartosc nie powinna byc wieksza niz 6")
+    }
+})
+
+
+let data = document.getElementById("data")
+
+
+
+document.getElementById("submit").addEventListener("click", function submit(){
+    if(imie.value==""){
+        imie.setCustomValidity("wpisz imie i nazwisko")
+    }
+    if(email.value==""){
+        email.setCustomValidity("wpisz email")
+    }
+    if(ocena.value==""){
+        ocena.setCustomValidity("wpisz ocene 1-6")
+    }
+    if(data.value==""){
+        data.setCustomValidity("wpisz date i godzine")
+    }else
+    {
+        data.setCustomValidity("")
+    }
+})
+
+    </script>
+</body>
+</html>
