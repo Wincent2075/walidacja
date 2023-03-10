@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nawigator Winenty Zawrzykraj 4T5i</title>
+    <script>
+         navigator.geolocation.getCurrentPosition(showPosition); 
+      function showPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var mapLink = "https://www.google.com/maps?q=" + latitude + "," + longitude;
+        document.getElementById("mapa").href = mapLink;
+        document.getElementById("szerokosc_geograficzna").innerHTML = "Szerokość geograficzna: " + latitude;
+        document.getElementById("dlugosc_geograficzna").innerHTML = "Długość geograficzna: " + longitude;
+      }
+    </script>
+  </head>
+  <body>
+    <p id="szerokosc_geograficzna"></p>
+    <p id="dlugosc_geograficzna"></p>
+    <a id="mapa" target="_blank">MAPA</a>
+
+  </body>
+</html>
